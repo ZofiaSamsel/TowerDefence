@@ -22,8 +22,7 @@ public class LevelManager : MonoBehaviour
     private void StworzPoziom()
     {
         rozmiarKafelka = kafelek.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-        Vector2 LewyKamery = Camera.main.ScreenToViewportPoint(new Vector2(0, 0));
-       
+        Vector2 LewyKamery =  Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
         for (int y = 0; y < 5; y++)
         {
             for (int x = 0; x < 5; x++)
