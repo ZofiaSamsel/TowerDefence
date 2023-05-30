@@ -25,16 +25,18 @@ public class LevelManager : MonoBehaviour
             "10101",
             "11111",
         };
+        int mapX = daneMapy[0].ToCharArray().Length;
+        int mapY = daneMapy.Length;
 
         rozmiarKafelka = kafelek[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         Vector2 LewyKamery =  Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
 
 
-        for (int y = 0; y < 5; y++)
+        for (int y = 0; y < mapY; y++)
         {
             char[] noweKafelki = daneMapy[y].ToCharArray();
 
-            for (int x = 0; x < 5; x++)
+            for (int x = 0; x < mapX; x++)
             {
                 UmiescKafelek(noweKafelki[x], rozmiarKafelka, LewyKamery, x, y);
                 
