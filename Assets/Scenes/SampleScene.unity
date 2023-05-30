@@ -244,7 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be80a43ae434e994a9b4583eb747a861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kafelek: {fileID: 2351466941919293331, guid: e19d7604b569f9e4691c02689cd3ff9b, type: 3}
+  kafelek:
+  - {fileID: 2351466941919293331, guid: e19d7604b569f9e4691c02689cd3ff9b, type: 3}
+  - {fileID: 7447446454620439498, guid: 59e2e28fb13a33f41b6fdb85ed6484d5, type: 3}
   rozmiarKafelka: 0
 --- !u!4 &1395805559
 Transform:
