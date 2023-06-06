@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,15 +17,8 @@ public class LevelManager : MonoBehaviour
 
     private void StworzPoziom()
     {
-        string[] daneMapy = new string[]
-        {
-            "00000",
-            "11111",
-            "10101",
-            "00000",
-            "10101",
-            "11111",
-        };
+        string[] daneMapy = WczytajPoziom();
+
         int mapX = daneMapy[0].ToCharArray().Length;
         int mapY = daneMapy.Length;
 
@@ -40,7 +34,6 @@ public class LevelManager : MonoBehaviour
             {
                 UmiescKafelek(noweKafelki[x], rozmiarKafelka, LewyKamery, x, y);
                 
-
             }
         }
     }
@@ -48,7 +41,19 @@ public class LevelManager : MonoBehaviour
     {
         int numerKafelka = (int)System.Char.GetNumericValue(rodzajKafelka);
 
-        Instantiate(kafelek[numerKafelka], new Vector2(LewyKamery.x + rozmiarKafelka * x, LewyKamery.y + rozmiarKafelka * y), Quaternion.identity);
+        GameObject nowyKafelek = Instantiate(kafelek[numerKafelka], 
+            new Vector2(LewyKamery.x + rozmiarKafelka * x, LewyKamery.y + rozmiarKafelka * y), Quaternion.identity);
+
+        nowyKafelek.GetComponent<KafelekScript>().Setup(new Punkt(x, y));
+    }
+
+    private string[] WczytajPoziom()
+    {
+        TextAsset wczytaneDane = Resources.Load("level") as TextAsset;
+
+        string dane = wczytaneDane.text.Replace(Environment.NewLine, string.Empty);
+
+        return dane.Split('-');
 
     }
 }
