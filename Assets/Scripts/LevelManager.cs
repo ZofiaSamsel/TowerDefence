@@ -8,15 +8,24 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] GameObject[] kafelek;
     public float rozmiarKafelka;
-    
+    public int mapX;
+    public int mapY;
+
+    public Dictionary<Punkt, KafelekScript> Kafelki { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
         StworzPoziom();
+        // wywo³ujemy fukncjê tworz¹c¹ waypointy
+        FindObjectOfType<WaypointsManager>().BuildWaypoints();
+
     }
 
     private void StworzPoziom()
+
     {
+        Kafelki = new Dictionary<Punkt, KafelekScript>();
         string[] daneMapy = WczytajPoziom();
 
         int mapX = daneMapy[0].ToCharArray().Length;
@@ -44,7 +53,8 @@ public class LevelManager : MonoBehaviour
         GameObject nowyKafelek = Instantiate(kafelek[numerKafelka], 
             new Vector2(LewyKamery.x + rozmiarKafelka * x, LewyKamery.y + rozmiarKafelka * y), Quaternion.identity);
 
-        nowyKafelek.GetComponent<KafelekScript>().Setup(new Punkt(x, y));
+        nowyKafelek.GetComponent<KafelekScript>().Setup(new Punkt(x, y), numerKafelka);
+        Kafelki.Add(new Punkt(x, y), nowyKafelek.GetComponent<KafelekScript>());
     }
 
     private string[] WczytajPoziom()
